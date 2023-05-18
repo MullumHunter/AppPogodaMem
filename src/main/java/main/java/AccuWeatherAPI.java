@@ -14,7 +14,7 @@ public class AccuWeatherAPI {
 
         OkHttpClient client = new OkHttpClient();
 
-        String url = "http://dataservice.accuweather.com/forecasts/v1/daily/5day/2515330?apikey=xsJP6jUAnstjcczxYQhTmD5aEjsvPauP";
+        String url = "http://dataservice.accuweather.com/forecasts/v1/daily/5day/2515330?apikey=oNKdoT8URIEAwVWmmVTjmliuZe33GVif";
 
         Request request = new Request.Builder()
                 .url(url)
