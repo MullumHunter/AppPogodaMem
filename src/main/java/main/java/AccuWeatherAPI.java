@@ -2,10 +2,7 @@ package main.java.main.java;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-import okhttp3.ResponseBody;
+import okhttp3.*;
 
 import java.io.IOException;
 
@@ -14,10 +11,23 @@ public class AccuWeatherAPI {
 
         OkHttpClient client = new OkHttpClient();
 
-        String url = "http://dataservice.accuweather.com/forecasts/v1/daily/5day/2515330?apikey=oNKdoT8URIEAwVWmmVTjmliuZe33GVif";
+        HttpUrl.Builder urlBuilder = new HttpUrl.Builder()
+                .scheme("http")
+                .host("dataservice.accuweather.com")
+                .addPathSegment("forecasts")
+                .addPathSegment("v1")
+                .addPathSegment("daily")
+                .addPathSegment("5day")
+                .addPathSegment("2515330");
+
+        urlBuilder.addQueryParameter("apikey", "oNKdoT8URIEAwVWmmVTjmliuZe33GVif");
+
+        HttpUrl finalUrl = urlBuilder.build();
+
+//        String url = "http://dataservice.accuweather.com/forecasts/v1/daily/5day/2515330?apikey=oNKdoT8URIEAwVWmmVTjmliuZe33GVif";
 
         Request request = new Request.Builder()
-                .url(url)
+                .url(finalUrl)
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
