@@ -23,6 +23,8 @@ public class AccuWeatherAPI {
                 .addPathSegment("5day")
                 .addPathSegment("2515330")
                 .addQueryParameter("apikey", "oNKdoT8URIEAwVWmmVTjmliuZe33GVif")
+                .addQueryParameter("language", "ru-ru")
+                .addQueryParameter("metric", "true")
                 .build();
 
         Request request = new Request.Builder()
