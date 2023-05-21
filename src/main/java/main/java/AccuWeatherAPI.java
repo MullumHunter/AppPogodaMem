@@ -38,6 +38,8 @@ public class AccuWeatherAPI {
 
         String json = responseBody.string();
         ObjectMapper mapper = new ObjectMapper();
+
+        //TODO: переделать на Java object
         JsonNode root = mapper.readTree(json);
 
         // Извлекаем нужные данные
