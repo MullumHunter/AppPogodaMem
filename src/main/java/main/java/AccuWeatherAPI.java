@@ -57,8 +57,8 @@ public class AccuWeatherAPI {
             String nightIconPhrase = forecast.get("Night").get("IconPhrase").asText();
             boolean hasDayPrecipitation = forecast.get("Day").get("HasPrecipitation").asBoolean();
             boolean hasNightPrecipitation = forecast.get("Night").get("HasPrecipitation").asBoolean();
-            int minTemperature = (forecast.get("Temperature").get("Minimum").get("Value").asInt() - 32) * 5 / 9;
-            int maxTemperature = (forecast.get("Temperature").get("Maximum").get("Value").asInt() - 32) * 5 / 9;
+            int minTemperature = (forecast.get("Temperature").get("Minimum").get("Value").asInt());
+            int maxTemperature = (forecast.get("Temperature").get("Maximum").get("Value").asInt());
 
             System.out.println("Дата: " + date);
             System.out.println("Погода днем: " + dayIconPhrase);
