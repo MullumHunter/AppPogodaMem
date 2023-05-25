@@ -7,8 +7,8 @@ import okhttp3.Request;
 import java.io.File;
 import java.io.IOException;
 
-public class ResponseBody {
-    public static void main(String[] args) throws IOException {
+public class AccuWeatherClient {
+    public static void getForecastForFiveDays() throws IOException {
 
         OkHttpClient client = new OkHttpClient();
 
@@ -31,11 +31,21 @@ public class ResponseBody {
 
         String json = responseBody.string();
         ObjectMapper objectMapper = new ObjectMapper();
+
+        //TODO:
+        // убрать работу с сохранением в файл
+        // сделать ДВА метода, один на 1 день, второй на 5 дней
+        // ниже пример как должно пройти преобразование ответа в Java Объект. НИКАКОГО РУЧНОГО ПАРСИНГА!
+//        WeatherObject weatherObject = objectMapper.readValue(json, WeatherObject.class);
+//        System.out.println(weatherObject);
+
         objectMapper.writeValue(new File("pogoda.json"), json);
         System.out.println(json);
     }
 
-    static JsonNode getWeatherData(String json) throws IOException {
+
+
+    public static JsonNode getWeatherData(String json) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode rootNode = objectMapper.readTree(json);
         return rootNode.get("DailyForecasts");
