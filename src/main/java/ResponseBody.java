@@ -34,6 +34,7 @@ public class ResponseBody {
         objectMapper.writeValue(new File("pogoda.json"), json);
         System.out.println(json);
     }
+
     static JsonNode getWeatherData(String json) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode rootNode = objectMapper.readTree(json);
