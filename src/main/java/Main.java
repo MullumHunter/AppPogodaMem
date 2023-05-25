@@ -1,7 +1,4 @@
-import OOO.myJson.JsonReader;
-import OOO.myJson.ResponseBody;
-import OOO.myJson.WeatherObject;
-import OOO.myJson.WeatherObjectSingleDay;
+
 import com.fasterxml.jackson.databind.JsonNode;
 
 import java.io.IOException;
