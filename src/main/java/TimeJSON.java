@@ -14,7 +14,7 @@ public class TimeJSON {
 
         OkHttpClient client = new OkHttpClient();
 
-        String url = "https://www.timeapi.io/api/Time/current/coordinate?latitude=55.7&longitude=37.6";
+        String url = "https://www.timeapi.io/api/Time/current/coordinate?latitude=55.1&longitude=61.6";
 
         Request request = new Request.Builder()
                 .url(url)
