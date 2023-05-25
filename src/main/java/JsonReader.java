@@ -5,7 +5,6 @@ import java.io.IOException;
 
 public class JsonReader {
     private final String filePath;
-
     public JsonReader(String filePath) {
         this.filePath = filePath;
     }

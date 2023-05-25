@@ -21,7 +21,6 @@ public class ResponseBody {
                 .addQueryParameter("language", "ru-ru")
                 .addQueryParameter("metric", "true")
                 .build();
-
         Request request = new Request.Builder().url(url).build();
         okhttp3.ResponseBody responseBody = client.newCall(request).execute().body();
 

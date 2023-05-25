@@ -30,7 +30,6 @@ public class WeatherObject {
             this.maxTemperatures[i] = forecast.get("Temperature").get("Maximum").get("Value").asInt();
         }
     }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
