@@ -1,3 +1,4 @@
+package weather.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -9,7 +10,8 @@ import okhttp3.ResponseBody;
 import java.io.IOException;
 
 public class AccuWeatherAPI {
-    public static void main(String[] args) throws IOException {
+    @Deprecated
+    public static void main() throws IOException {
 
         OkHttpClient client = new OkHttpClient();
 
@@ -40,7 +42,6 @@ public class AccuWeatherAPI {
         String json = responseBody.string();
         ObjectMapper mapper = new ObjectMapper();
 
-        //TODO: переделать на Java object
         JsonNode root = mapper.readTree(json);
 
         // Извлекаем нужные данные
