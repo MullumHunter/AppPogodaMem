@@ -1,29 +1,22 @@
-package weather.dto;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Data
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class WeatherResponse {
 
+public class WeatherResponse {
     @Override
     public String toString() {
-        return "WeatherResponse{" +
-                ", WeatherText='" + weatherText + '\'' +
-                ", Date='" + date + '\'' +
-                ", Temperature=" + temperature +
-                ", Day=" + day +
-                ", Night=" + night +
-                '}';
+        return date + "\n"+
+                 temperature + "\n"+
+                "Днем:" + day + "\n"+
+                "Ночью:" + night + "\n"+
+                "---------------------------\n";
     }
-
-    @JsonProperty(value = "WeatherText")
-    private String weatherText;
-
     @JsonProperty(value = "Date")
     private String date;
 
@@ -35,5 +28,5 @@ public class WeatherResponse {
 
     @JsonProperty(value = "Night")
     private Night night;
-}
 
+}
