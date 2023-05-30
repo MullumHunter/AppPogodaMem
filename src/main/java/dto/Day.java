@@ -1,12 +1,14 @@
+package dto;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 
-public class Night {
+public class Day {
     @Override
     public String toString() {
         return " " + IconPhrase + "\n" +
-                "Осадки ночью - " + HasPrecipitation;
+                "Осадки днем - " + HasPrecipitation;
     }
 
     @JsonProperty(value = "HasPrecipitation")

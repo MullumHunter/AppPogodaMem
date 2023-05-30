@@ -1,5 +1,8 @@
+package servise;
+
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import dto.WeatherResponse;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -17,7 +20,7 @@ public class AccuWeatherClientt {
                 .scheme("http")
                 .host("dataservice.accuweather.com")
                 .addPathSegments("forecasts/v1/daily/5day/")
-                .addPathSegment("2515330")
+                .addPathSegment("2497181")
                 .addQueryParameter("apikey", "zNg7A9gvOLDVq1paBvciXqYqVPKXj4WJ")
                 .addQueryParameter("language", "ru-ru")
                 .addQueryParameter("metric", "true")
@@ -55,7 +58,7 @@ public class AccuWeatherClientt {
                 .scheme("http")
                 .host("dataservice.accuweather.com")
                 .addPathSegments("forecasts/v1/daily/1day/")
-                .addPathSegment("2515330")
+                .addPathSegment("2497181")
                 .addQueryParameter("apikey", "zNg7A9gvOLDVq1paBvciXqYqVPKXj4WJ")
                 .addQueryParameter("language", "ru-ru")
                 .addQueryParameter("metric", "true")
@@ -76,6 +79,7 @@ public class AccuWeatherClientt {
         int indexTop = response.indexOf("[{\"Date\"");
         int indexDown = response.lastIndexOf("}");
         response = response.substring(indexTop, indexDown);
+
 
         List<WeatherResponse> weatherResponses = objectMapper.readValue(response, new TypeReference<List<WeatherResponse>>() {
         });
