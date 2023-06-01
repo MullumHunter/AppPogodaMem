@@ -11,7 +11,7 @@ import okhttp3.ResponseBody;
 import java.io.IOException;
 import java.util.List;
 
-public class AccuWeatherClientt {
+public class AccuWeatherClient {
     public static void getForecastForFiveDays() throws IOException {
 
         OkHttpClient client = new OkHttpClient();
