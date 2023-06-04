@@ -9,14 +9,13 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) throws IOException {
 
-        AppDontBored.getIdea();
+//        AppDontBored.getIdea();
+//        AppTime.getTime();
 
-        AppTime.getTime();
+        System.out.println("На пять дней");
+        AccuWeatherClient.getForecastForFiveDays();
 
-//        AccuWeatherClientt.getForecastForFiveDays();
-
-        System.out.print("На один день");
-
+        System.out.println("На один день");
         AccuWeatherClient.getForecastFirstDay();
     }
 }
