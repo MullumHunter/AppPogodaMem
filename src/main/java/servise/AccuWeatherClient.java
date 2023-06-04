@@ -13,23 +13,34 @@ import java.util.List;
 
 public class AccuWeatherClient {
     public static void getForecastForFiveDays() throws IOException {
-        final String DAY = "5day/";
-        getForecast(DAY);
+        final String day = "5day/";
+
+        List<WeatherResponse> forecast = getForecast(day);
+
+        for (WeatherResponse weatherResponse : forecast) {
+            System.out.println(weatherResponse);
+        }
     }
 
     public static void getForecastFirstDay() throws IOException {
-        final String DAY = "1day/";
-        getForecast(DAY);
+        final String day = "1day/";
+        getForecast(day);
+
+        List<WeatherResponse> forecast = getForecast(day);
+
+        for (WeatherResponse weatherResponse : forecast) {
+            System.out.println(weatherResponse);
+        }
     }
 
-    private static void getForecast(String DAY) throws IOException {
+    private static List<WeatherResponse> getForecast(String day) throws IOException {
         OkHttpClient client = new OkHttpClient();
 
         HttpUrl url = new HttpUrl.Builder()
                 .scheme("http")
                 .host("dataservice.accuweather.com")
                 .addPathSegments("forecasts/v1/daily/")
-                .addPathSegments(DAY)
+                .addPathSegments(day)
                 .addPathSegment("2497181")
                 .addQueryParameter("apikey", "zNg7A9gvOLDVq1paBvciXqYqVPKXj4WJ")
                 .addQueryParameter("language", "ru-ru")
@@ -42,15 +53,11 @@ public class AccuWeatherClient {
 
         if (responseBody == null) {
             System.out.println("Нет ответа");
-            return;
+            return null;
         }
 
         String response = responseBody.string();
-        List<WeatherResponse> weatherResponses = parseResponse(response);
-
-        for (WeatherResponse weatherResponse : weatherResponses) {
-            System.out.println(weatherResponse);
-        }
+        return parseResponse(response);
     }
 
     private static List<WeatherResponse> parseResponse(String response) throws IOException {
