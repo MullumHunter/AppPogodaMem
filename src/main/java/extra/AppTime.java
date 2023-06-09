@@ -1,4 +1,4 @@
-package servise;
+package extra;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dto.TimeResponse;
