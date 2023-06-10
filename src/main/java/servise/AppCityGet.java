@@ -10,21 +10,17 @@ import okhttp3.ResponseBody;
 import java.io.IOException;
 
 public class AppCityGet {
-    public static String getCityResult(String sity) throws IOException {
-        if (sity == null) {
-            throw new IllegalArgumentException("Город не может быть null");
-        }
+    private static final String API_KEY = GlobalStateApp.getInstance().getAPI_KEY();
 
-        if (sity == null) {
-            throw new IllegalArgumentException("Город не может быть null");
-        }
+    public static String getCityResult(String city_name) throws IOException {
+
         OkHttpClient client = new OkHttpClient();
         HttpUrl url = new HttpUrl.Builder()
                 .scheme("http")
                 .host("dataservice.accuweather.com")
                 .addPathSegments("locations/v1/cities/search")
-                .addQueryParameter("apikey", "9GixShszNLSlKHGqgNtm558TVJ8Xb8hR")
-                .addQueryParameter("q", sity)
+                .addQueryParameter("apikey", API_KEY)
+                .addQueryParameter("q", city_name)
                 .build();
 
         Request request = new Request.Builder().url(url).build();
@@ -38,17 +34,15 @@ public class AppCityGet {
         String json = responseBody.string();
         ObjectMapper objectMapper = new ObjectMapper();
 
-
         CityResponse[] cityResponses = objectMapper.readValue(json, CityResponse[].class);
-        if (cityResponses.length == 0) {
+
+        if (cityResponses == null || cityResponses.length == 0) {
             throw new IOException("Не удалось получить ключ города");
         }
         CityResponse firstCityResponse = cityResponses[0];
+        String cityResponse = firstCityResponse.toString();
 
-
-        AccuWeatherClient.setCityKey(firstCityResponse.getKey());
-
-        return firstCityResponse.getKey();
-
+        GlobalStateApp.getInstance().setCity(cityResponse);
+        return cityResponse;
     }
 }

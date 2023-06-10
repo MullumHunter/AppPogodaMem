@@ -10,8 +10,7 @@ import lombok.NoArgsConstructor;
 public class IdeaResponse {
     @Override
     public String toString(){
-        return "Idea for you - " + activity + "\n" +
-                "TYPE - " + type;
+        return "---------------------------" + "\n" + "Идея дня: " + activity;
     }
    @JsonProperty(value = "activity")
     private  String activity;

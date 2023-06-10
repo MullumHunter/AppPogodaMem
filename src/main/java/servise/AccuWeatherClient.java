@@ -12,35 +12,32 @@ import okhttp3.ResponseBody;
 import java.io.IOException;
 import java.util.List;
 
-public class AccuWeatherClient {
+public class AccuWeatherClient implements WeatherProvider{
+    private static final String API_KEY = GlobalStateApp.getInstance().getAPI_KEY();
+    private static String city = null;
 
 
-    private static String sityKey;
-
-    public static void setCityKey(String key) {
-        sityKey = key;
-    }
-
-    public static void getForecastForFiveDays() throws IOException {
+    public void getForecastForFiveDays() throws IOException {
+        updateCity();
         final String day = "5day/";
         getForecast(day);
     }
 
-    public static void getForecastFirstDay() throws IOException {
+    public void getForecastFirstDay() throws IOException {
+        updateCity();
         final String day = "1day/";
         getForecast(day);
     }
 
     private static void getForecast(String day) throws IOException {
         OkHttpClient client = new OkHttpClient();
-
         HttpUrl url = new HttpUrl.Builder()
                 .scheme("http")
                 .host("dataservice.accuweather.com")
                 .addPathSegments("forecasts/v1/daily/")
                 .addPathSegments(day)
-                .addPathSegment(sityKey)
-                .addQueryParameter("apikey", "9GixShszNLSlKHGqgNtm558TVJ8Xb8hR")
+                .addPathSegment(city)
+                .addQueryParameter("apikey", API_KEY)
                 .addQueryParameter("language", "ru-ru")
                 .addQueryParameter("metric", "true")
                 .build();
@@ -66,9 +63,17 @@ public class AccuWeatherClient {
     private static List<WeatherResponse> parseResponse(String response) throws IOException {
         int indexTop = response.indexOf("[{\"Date\"");
         int indexDown = response.lastIndexOf("}");
-        response = response.substring(indexTop, indexDown);
+        try {
+            response = response.substring(indexTop, indexDown);
+        }catch (StringIndexOutOfBoundsException e){
+            System.out.println("Лимит запросов исчерпан");
+        }
         ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.readValue(response, new TypeReference<List<WeatherResponse>>() {
         });
+    }
+
+    public static void updateCity() {
+        city = GlobalStateApp.getInstance().getCity();
     }
 }
