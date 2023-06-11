@@ -8,8 +8,8 @@ import java.util.Map;
 
 
 public class Controller {
-    AccuWeatherClient accuWeatherClient = new AccuWeatherClient();
-    Map<Integer, Periods> variant = new HashMap();
+    private final WeatherProvider weatherProvider = new AccuWeatherClient();
+    private final Map<Integer, Periods> variant = new HashMap<>();
 
     public Controller() {
         variant.put(1, Periods.ONE);
@@ -22,10 +22,10 @@ public class Controller {
         try {
             switch (variant.get(command)) {
                 case ONE:
-                    accuWeatherClient.getForecastFirstDay();
+                    weatherProvider.getForecastFirstDay();
                     break;
                 case FIVE:
-                    accuWeatherClient.getForecastForFiveDays();
+                    weatherProvider.getForecastForFiveDays();
                     break;
             }
         } catch (NullPointerException e) {

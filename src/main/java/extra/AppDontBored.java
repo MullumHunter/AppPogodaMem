@@ -7,10 +7,10 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.ResponseBody;
 
-import java.io.IOException;
-
 public class AppDontBored {
-    public static String getIdea() throws IOException {
+    private static final String ERROR_GENERATE_IDEA_OF_DAY = "Не удалось получить идею дня, справляйтесь сами";
+
+    public static String getIdea() {
 
         OkHttpClient client = new OkHttpClient();
 
@@ -22,16 +22,23 @@ public class AppDontBored {
                 .build();
 
         Request request = new Request.Builder().url(url).build();
-
-        ResponseBody responseBody = client.newCall(request).execute().body();
-
-        if (responseBody == null) {
-            System.out.println("Нет ответа");
-        }
-        String json = responseBody.string();
         ObjectMapper objectMapper = new ObjectMapper();
 
-        IdeaResponse responseIdea = objectMapper.readValue(json, IdeaResponse.class);
-        return responseIdea + "\n"+"---------------------------";
+        //TODO: ResponseBody - to try with resources
+        try {
+            ResponseBody responseBody = client.newCall(request).execute().body();
+            if (responseBody == null) {
+                System.out.println("Нет ответа");
+                return ERROR_GENERATE_IDEA_OF_DAY;
+            }
+
+            String json = responseBody.string();
+            IdeaResponse responseIdea = objectMapper.readValue(json, IdeaResponse.class);
+            return responseIdea + "\n" + "---------------------------";
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return ERROR_GENERATE_IDEA_OF_DAY;
     }
 }

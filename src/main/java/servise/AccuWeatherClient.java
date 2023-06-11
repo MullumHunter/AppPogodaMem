@@ -2,7 +2,6 @@ package servise;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import dto.CityResponse;
 import dto.WeatherResponse;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
@@ -12,11 +11,10 @@ import okhttp3.ResponseBody;
 import java.io.IOException;
 import java.util.List;
 
-public class AccuWeatherClient implements WeatherProvider{
+public class AccuWeatherClient implements WeatherProvider {
     private static final String API_KEY = GlobalStateApp.getInstance().getAPI_KEY();
     private static String city = null;
-
-
+    
     public void getForecastForFiveDays() throws IOException {
         updateCity();
         final String day = "5day/";
@@ -27,6 +25,11 @@ public class AccuWeatherClient implements WeatherProvider{
         updateCity();
         final String day = "1day/";
         getForecast(day);
+    }
+
+    //TODO: перенести в UserInterface после валидации
+    private static void updateCity() {
+        city = GlobalStateApp.getInstance().getCity();
     }
 
     private static void getForecast(String day) throws IOException {
@@ -65,15 +68,11 @@ public class AccuWeatherClient implements WeatherProvider{
         int indexDown = response.lastIndexOf("}");
         try {
             response = response.substring(indexTop, indexDown);
-        }catch (StringIndexOutOfBoundsException e){
+        } catch (StringIndexOutOfBoundsException e) {
             System.out.println("Лимит запросов исчерпан");
         }
         ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.readValue(response, new TypeReference<List<WeatherResponse>>() {
+        return objectMapper.readValue(response, new TypeReference<>() {
         });
-    }
-
-    public static void updateCity() {
-        city = GlobalStateApp.getInstance().getCity();
     }
 }
