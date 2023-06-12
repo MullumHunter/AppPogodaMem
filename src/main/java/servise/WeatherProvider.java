@@ -4,7 +4,7 @@ import java.io.IOException;
 
 public interface WeatherProvider {
 
-    void getForecastForFiveDays() throws IOException;
+    void getForecastForFiveDays();
 
-    void getForecastFirstDay() throws IOException;
+    void getForecastFirstDay();
 }

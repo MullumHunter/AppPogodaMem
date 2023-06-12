@@ -16,7 +16,8 @@ public class Controller {
         variant.put(5, Periods.FIVE);
     }
 
-    public void onUserInput(String result) throws IOException {
+    public void onUserInput(String result) {
+
         int command = Integer.parseInt(result);
 
         try {

@@ -64,7 +64,7 @@ public class UserInterface {
     }
 
     //TODO: fix exception
-    private void checkController(String result) throws IOException {
+    private void checkController(String result){
         controller.onUserInput(result);
     }
 }

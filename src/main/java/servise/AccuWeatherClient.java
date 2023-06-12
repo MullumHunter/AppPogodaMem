@@ -14,14 +14,14 @@ import java.util.List;
 public class AccuWeatherClient implements WeatherProvider {
     private static final String API_KEY = GlobalStateApp.getInstance().getAPI_KEY();
     private static String city = null;
-    
-    public void getForecastForFiveDays() throws IOException {
+
+    public void getForecastForFiveDays() {
         updateCity();
         final String day = "5day/";
         getForecast(day);
     }
 
-    public void getForecastFirstDay() throws IOException {
+    public void getForecastFirstDay() {
         updateCity();
         final String day = "1day/";
         getForecast(day);
@@ -32,7 +32,7 @@ public class AccuWeatherClient implements WeatherProvider {
         city = GlobalStateApp.getInstance().getCity();
     }
 
-    private static void getForecast(String day) throws IOException {
+    private static void getForecast(String day) {
         OkHttpClient client = new OkHttpClient();
         HttpUrl url = new HttpUrl.Builder()
                 .scheme("http")
@@ -48,18 +48,23 @@ public class AccuWeatherClient implements WeatherProvider {
                 .url(url)
                 .build();
 
-        ResponseBody responseBody = client.newCall(request).execute().body();
+        try {
+            ResponseBody responseBody = client.newCall(request).execute().body();
 
-        if (responseBody == null) {
-            System.out.println("Нет ответа");
-            return;
-        }
+            if (responseBody == null) {
+                System.out.println("Нет ответа");
+                return;
+            }
 
-        String response = responseBody.string();
-        List<WeatherResponse> weatherResponses = parseResponse(response);
+            String response = responseBody.string();
+            List<WeatherResponse> weatherResponses = parseResponse(response);
 
-        for (WeatherResponse weatherResponse : weatherResponses) {
-            System.out.println(weatherResponse);
+            for (WeatherResponse weatherResponse : weatherResponses) {
+                System.out.println(weatherResponse);
+            }
+        } catch (Exception e) {
+            System.out.println("Не удалось получить прогноз.");
+            e.printStackTrace();
         }
     }
 
@@ -75,4 +80,5 @@ public class AccuWeatherClient implements WeatherProvider {
         return objectMapper.readValue(response, new TypeReference<>() {
         });
     }
+
 }
