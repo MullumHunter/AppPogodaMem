@@ -39,8 +39,6 @@ public class UserInterface {
                 GlobalStateApp.getInstance().setCity(cityName);
             } catch (IllegalArgumentException e) {
                 System.out.println("\u001B[96mОшибка 1: " + e.getMessage() + "\u001B[0m");
-            } catch (IOException e) {
-                System.out.println("\u001B[96mНе удалось получить ключ города\u001B[0m");
             }
         }
     }
