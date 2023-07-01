@@ -47,7 +47,7 @@ public class AppCityGet {
             return cityResponse;
 
         } catch (IOException e) {
-            System.out.println("Ошибка: исчерпан лимит запросов ");
+            System.out.println("\u001B[37mОшибка: исчерпан лимит запросов");
             System.exit(0);
         }
         return null;

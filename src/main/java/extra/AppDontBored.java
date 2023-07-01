@@ -8,10 +8,9 @@ import okhttp3.Request;
 import okhttp3.ResponseBody;
 
 public class AppDontBored {
-    private static final String ERROR_GENERATE_IDEA_OF_DAY = "Не удалось получить идею дня, справляйтесь сами";
+    private static final String ERROR_GENERATE_IDEA_OF_DAY = "Не удалось получить идею дня, справляйтесь сами =)";
 
     public static String getIdea() {
-
         OkHttpClient client = new OkHttpClient();
 
         HttpUrl url = new HttpUrl.Builder()
@@ -24,9 +23,7 @@ public class AppDontBored {
         Request request = new Request.Builder().url(url).build();
         ObjectMapper objectMapper = new ObjectMapper();
 
-        //TODO: ResponseBody - to try with resources
-        try {
-            ResponseBody responseBody = client.newCall(request).execute().body();
+        try (ResponseBody responseBody = client.newCall(request).execute().body()) {
             if (responseBody == null) {
                 System.out.println("Нет ответа");
                 return ERROR_GENERATE_IDEA_OF_DAY;
@@ -36,9 +33,7 @@ public class AppDontBored {
             IdeaResponse responseIdea = objectMapper.readValue(json, IdeaResponse.class);
             return responseIdea + "\n" + "---------------------------";
         } catch (Exception e) {
-            e.printStackTrace();
+            return ERROR_GENERATE_IDEA_OF_DAY;
         }
-
-        return ERROR_GENERATE_IDEA_OF_DAY;
     }
 }
