@@ -36,19 +36,21 @@ public class UserInterface {
                 validateCityName(cityName);
                 getCityResult(cityName);
                 checkController(result);
+                GlobalStateApp.getInstance().setCity(cityName);
             } catch (IllegalArgumentException e) {
-                System.out.println("\u001B[96mОшибка: " + e.getMessage() + "\u001B[0m");
+                System.out.println("\u001B[96mОшибка 1: " + e.getMessage() + "\u001B[0m");
             } catch (IOException e) {
                 System.out.println("\u001B[96mНе удалось получить ключ города\u001B[0m");
             }
         }
     }
 
-    private void validateCityName(String cityName) throws IllegalArgumentException {
-        final String cityNamePattern = ".*\\d.*";
+    private void validateCityName(String cityName){
 
-        if (cityName.matches(cityNamePattern)) {
-            throw new IllegalArgumentException("Неверный формат названия города");
+        try {
+            final String cityNamePattern = ".*\\d.*";
+        }catch (IllegalArgumentException e){
+            System.out.println("Неверный формат названия города "+e.getMessage());
         }
     }
 
@@ -63,7 +65,7 @@ public class UserInterface {
         }
     }
 
-    //TODO: fix exception
+
     private void checkController(String result){
         controller.onUserInput(result);
     }

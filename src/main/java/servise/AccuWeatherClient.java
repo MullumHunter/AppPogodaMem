@@ -13,26 +13,19 @@ import java.util.List;
 
 public class AccuWeatherClient implements WeatherProvider {
     private static final String API_KEY = GlobalStateApp.getInstance().getAPI_KEY();
-    private static String city = null;
 
     public void getForecastForFiveDays() {
-        updateCity();
         final String day = "5day/";
         getForecast(day);
     }
 
     public void getForecastFirstDay() {
-        updateCity();
         final String day = "1day/";
         getForecast(day);
     }
 
-    //TODO: перенести в UserInterface после валидации
-    private static void updateCity() {
-        city = GlobalStateApp.getInstance().getCity();
-    }
-
     private static void getForecast(String day) {
+        String city  = GlobalStateApp.getInstance().getCity();
         OkHttpClient client = new OkHttpClient();
         HttpUrl url = new HttpUrl.Builder()
                 .scheme("http")

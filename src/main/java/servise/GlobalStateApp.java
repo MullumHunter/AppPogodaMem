@@ -2,7 +2,7 @@ package servise;
 
 public class GlobalStateApp {
     private static GlobalStateApp INSTANCE;
-    private String city = null;
+    private String city;
     private  final String API_KEY = "oRgoHTf4diqAXhLagYS2eB5cdUCG4YMu";
 
     private GlobalStateApp(){}
