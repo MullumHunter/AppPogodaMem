@@ -38,17 +38,17 @@ public class UserInterface {
                 checkController(result);
                 GlobalStateApp.getInstance().setCity(cityName);
             } catch (IllegalArgumentException e) {
-                System.out.println("\u001B[96mОшибка 1: " + e.getMessage() + "\u001B[0m");
+                System.out.println("\u001B[96mОшибка : " + e.getMessage() + "\u001B[0m");
             }
         }
     }
 
     private void validateCityName(String cityName){
 
-        try {
-            final String cityNamePattern = ".*\\d.*";
-        }catch (IllegalArgumentException e){
-            System.out.println("Неверный формат названия города "+e.getMessage());
+        final String cityNamePattern = ".*\\d.*";
+
+        if (cityName.matches(cityNamePattern)) {
+            throw new IllegalArgumentException("Неверный формат названия города");
         }
     }
 
