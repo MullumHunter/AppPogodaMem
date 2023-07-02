@@ -9,10 +9,10 @@ import okhttp3.ResponseBody;
 
 import java.io.IOException;
 
-public class AppCityGet {
+public class AppCityService {
     private static final String API_KEY = GlobalStateApp.getInstance().getAPI_KEY();
 
-    public static String getCityResult(String city_name) {
+    public static String getCityKey(String city_name) {
 
         try {
             OkHttpClient client = new OkHttpClient();
@@ -41,15 +41,13 @@ public class AppCityGet {
                 throw new IOException("Не удалось получить ключ города");
             }
             CityResponse firstCityResponse = cityResponses[0];
-            String cityResponse = firstCityResponse.toString();
-
-            GlobalStateApp.getInstance().setCity(cityResponse);
-            return cityResponse;
+            return firstCityResponse.getKey();
 
         } catch (IOException e) {
             System.out.println("\u001B[37mОшибка: исчерпан лимит запросов");
             System.exit(0);
         }
+        // TODO: придумать другое решение, null возвращать плохая практика
         return null;
     }
 }

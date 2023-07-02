@@ -1,10 +1,9 @@
 package servise;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 import static extra.AppDontBored.getIdea;
-import static servise.AppCityGet.getCityResult;
+import static servise.AppCityService.getCityKey;
 
 public class UserInterface {
     private final Controller controller = new Controller();
@@ -34,8 +33,12 @@ public class UserInterface {
 
             try {
                 validateCityName(cityName);
-                getCityResult(cityName);
+                // GlobalStateApp.getInstance().setCity(cityResponse);
+                // это не относится к получению ключа города, предлагаю посмотреть где заполнять параметр этот
+                String cityKey = getCityKey(cityName);
                 checkController(result);
+
+                // TODO: а разве это не было сделано при получении ключа города?
                 GlobalStateApp.getInstance().setCity(cityName);
             } catch (IllegalArgumentException e) {
                 System.out.println("\u001B[96mОшибка : " + e.getMessage() + "\u001B[0m");
