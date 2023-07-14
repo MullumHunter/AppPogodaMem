@@ -25,7 +25,7 @@ public class AccuWeatherClient implements WeatherProvider {
     }
 
     private static void getForecast(String day) {
-        String city  = GlobalStateApp.getInstance().getCity();
+        String city = GlobalStateApp.getInstance().getCity();
         OkHttpClient client = new OkHttpClient();
         HttpUrl url = new HttpUrl.Builder()
                 .scheme("http")
@@ -61,7 +61,7 @@ public class AccuWeatherClient implements WeatherProvider {
         }
     }
 
-    private static List<WeatherResponse> parseResponse(String response) throws IOException {
+    public static List<WeatherResponse> parseResponse(String response) throws IOException {
         int indexTop = response.indexOf("[{\"Date\"");
         int indexDown = response.lastIndexOf("}");
         try {
