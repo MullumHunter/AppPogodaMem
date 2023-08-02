@@ -33,20 +33,20 @@ public class UserInterface {
 
             try {
                 validateCityName(cityName);
-                // GlobalStateApp.getInstance().setCity(cityResponse);
-                // это не относится к получению ключа города, предлагаю посмотреть где заполнять параметр этот
-                String cityKey = getCityKey(cityName);
+                GlobalStateApp.getInstance().setCity(cityName);
+//                 это не относится к получению ключа города, предлагаю посмотреть где заполнять параметр этот
+//                String cityKey = getCityKey(cityName);
                 checkController(result);
 
                 // TODO: а разве это не было сделано при получении ключа города?
-                GlobalStateApp.getInstance().setCity(cityName);
+//                GlobalStateApp.getInstance().setCity(cityName);
             } catch (IllegalArgumentException e) {
                 System.out.println("\u001B[96mОшибка : " + e.getMessage() + "\u001B[0m");
             }
         }
     }
 
-    private void validateCityName(String cityName){
+    private void validateCityName(String cityName) {
 
         final String cityNamePattern = ".*\\d.*";
 
@@ -65,9 +65,7 @@ public class UserInterface {
             System.exit(0);
         }
     }
-
-
-    private void checkController(String result){
+    private void checkController(String result) {
         controller.onUserInput(result);
     }
 }

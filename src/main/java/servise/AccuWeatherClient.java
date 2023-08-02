@@ -25,14 +25,15 @@ public class AccuWeatherClient implements WeatherProvider {
     }
 
     private static void getForecast(String day) {
-        String city = GlobalStateApp.getInstance().getCity();
+        String sity = GlobalStateApp.getInstance().getCity();
+        String cityKey = AppCityService.getCityKey(sity);
         OkHttpClient client = new OkHttpClient();
         HttpUrl url = new HttpUrl.Builder()
                 .scheme("http")
                 .host("dataservice.accuweather.com")
                 .addPathSegments("forecasts/v1/daily/")
                 .addPathSegments(day)
-                .addPathSegment(city)
+                .addPathSegment(cityKey)
                 .addQueryParameter("apikey", API_KEY)
                 .addQueryParameter("language", "ru-ru")
                 .addQueryParameter("metric", "true")
@@ -73,5 +74,4 @@ public class AccuWeatherClient implements WeatherProvider {
         return objectMapper.readValue(response, new TypeReference<>() {
         });
     }
-
 }

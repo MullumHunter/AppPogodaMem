@@ -12,7 +12,7 @@ import java.io.IOException;
 public class AppCityService {
     private static final String API_KEY = GlobalStateApp.getInstance().getAPI_KEY();
 
-    public static String getCityKey(String city_name) {
+    public static String getCityKey(String cityName) {
 
         try {
             OkHttpClient client = new OkHttpClient();
@@ -21,7 +21,7 @@ public class AppCityService {
                     .host("dataservice.accuweather.com")
                     .addPathSegments("locations/v1/cities/search")
                     .addQueryParameter("apikey", API_KEY)
-                    .addQueryParameter("q", city_name)
+                    .addQueryParameter("q", cityName)
                     .build();
 
             Request request = new Request.Builder().url(url).build();

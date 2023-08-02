@@ -33,16 +33,5 @@ public class Controller {
             System.out.println("\u001B[96mОшибка ввода. Пожалуйста - выберите один из предложенных выше вариантов\u001B[0m");
         }
     }
-
-    public int calculate(int i, int j) {
-        return i + j;
-    }
-
-    public int division(int i, int j) {
-        if (j == 0)
-            throw new IllegalArgumentException("делитель не может быть равен нулю");
-
-        return i / j;
-    }
 }
 
