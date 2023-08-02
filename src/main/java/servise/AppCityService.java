@@ -1,5 +1,7 @@
 package servise;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dto.CityResponse;
 import okhttp3.HttpUrl;
@@ -12,7 +14,7 @@ import java.io.IOException;
 public class AppCityService {
     private static final String API_KEY = GlobalStateApp.getInstance().getAPI_KEY();
 
-    public static String getCityKey(String cityName) {
+    public static  String getCityKey(String cityName) {
 
         try {
             OkHttpClient client = new OkHttpClient();
@@ -42,7 +44,6 @@ public class AppCityService {
             }
             CityResponse firstCityResponse = cityResponses[0];
             return firstCityResponse.getKey();
-
         } catch (IOException e) {
             System.out.println("\u001B[37mОшибка: исчерпан лимит запросов");
             System.exit(0);

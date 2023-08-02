@@ -3,7 +3,6 @@ package servise;
 import java.util.Scanner;
 
 import static extra.AppDontBored.getIdea;
-import static servise.AppCityService.getCityKey;
 
 public class UserInterface {
     private final Controller controller = new Controller();
@@ -34,12 +33,7 @@ public class UserInterface {
             try {
                 validateCityName(cityName);
                 GlobalStateApp.getInstance().setCity(cityName);
-//                 это не относится к получению ключа города, предлагаю посмотреть где заполнять параметр этот
-//                String cityKey = getCityKey(cityName);
                 checkController(result);
-
-                // TODO: а разве это не было сделано при получении ключа города?
-//                GlobalStateApp.getInstance().setCity(cityName);
             } catch (IllegalArgumentException e) {
                 System.out.println("\u001B[96mОшибка : " + e.getMessage() + "\u001B[0m");
             }
@@ -47,6 +41,12 @@ public class UserInterface {
     }
 
     private void validateCityName(String cityName) {
+
+        checkCityNameFormat(cityName);
+        AppCityService.getCityKey(cityName);
+    }
+
+    private void checkCityNameFormat(String cityName) {
 
         final String cityNamePattern = ".*\\d.*";
 
@@ -65,6 +65,7 @@ public class UserInterface {
             System.exit(0);
         }
     }
+
     private void checkController(String result) {
         controller.onUserInput(result);
     }
